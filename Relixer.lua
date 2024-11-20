@@ -148,23 +148,23 @@ end
 
 ------ SLASH COMMANDS ------
 
-SLASH_RELIXER_LS1 = "/ls"
+SLASH_RELIXER_LS1 = "/relixerls"
 SlashCmdList["RELIXER_LS"] = Relixer_LS
 
-SLASH_RELIXER_FROSTSHOCKMAX1 = "/frostshockmax"
+SLASH_RELIXER_FROSTSHOCKMAX1 = "/relixerfrostshockmax"
 SlashCmdList["RELIXER_FROSTSHOCKMAX"] = Relixer_FrostShockMax
 
-SLASH_RELIXER_FROSTSHOCKMIN1 = "/frostshockmin"
+SLASH_RELIXER_FROSTSHOCKMIN1 = "/relixerfrostshockmin"
 SlashCmdList["RELIXER_FROSTSHOCKMIN"] = Relixer_FrostShockMin
 
-SLASH_RELIXER_EARTHSHOCKMAX1 = "/earthshockmax"
+SLASH_RELIXER_EARTHSHOCKMAX1 = "/relixerearthshockmax"
 SlashCmdList["RELIXER_EARTHSHOCKMAX"] = Relixer_EarthShockMax
 
-SLASH_RELIXER_EARTHSHOCKMIN1 = "/earthshockmin"
+SLASH_RELIXER_EARTHSHOCKMIN1 = "/relixerearthshockmin"
 SlashCmdList["RELIXER_EARTHSHOCKMIN"] = Relixer_EarthShockMin
 
-SLASH_RELIXER_FLAMESHOCKMAX1 = "/flameshockmax"
+SLASH_RELIXER_FLAMESHOCKMAX1 = "/relixerflameshockmax"
 SlashCmdList["RELIXER_FLAMESHOCKMAX"] = Relixer_FlameShockMax
 
-SLASH_RELIXER_FLAMESHOCKMIN1 = "/flameshockmin"
+SLASH_RELIXER_FLAMESHOCKMIN1 = "/relixerflameshockmin"
 SlashCmdList["RELIXER_FLAMESHOCKMIN"] = Relixer_FlameShockMin
