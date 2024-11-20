@@ -95,7 +95,6 @@ end
 
 function Relixer_LS()
     local lsCooldown = GetCooldown(getSpellId("Lightning Strike"))
-	print("Spell ID for Lightning Strike:", getSpellId("Lightning Strike"))
 
     if lsCooldown == 0 then
         CastSwapByName("Lightning Strike", nil, "Totem of Crackling Thunder")
