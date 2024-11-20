@@ -1,0 +1,23 @@
+<Bindings>
+    <Binding name="Lightning Strike" header="RELIXER">
+        Relixer_LS()
+    </Binding>
+    <Binding name="Frost Shock Max Rank">
+        Relixer_FrostShockMax()
+    </Binding>
+    <Binding name="Frost Shock Rank 1">
+        Relixer_FrostShockMin()
+    </Binding>
+    <Binding name="Earth Shock Max Rank">
+        Relixer_EarthShockMax()
+    </Binding>
+    <Binding name="Earth Shock Rank 1">
+        Relixer_EarthShockMin()
+    </Binding>
+    <Binding name="Flame Shock Max Rank">
+        Relixer_FlameShockMax()
+    </Binding>
+    <Binding name="Flame Shock Rank 1">
+        Relixer_FlameShockMin()
+    </Binding>
+</Bindings>

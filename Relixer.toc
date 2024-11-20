@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: |cFF0000FFRelixer|r
+
+## Version: 1.0
+## Notes: Relic Swapping
+## Author: Abstractz
+
+Relixer.lua
+Bindings.xml
