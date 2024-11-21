@@ -111,10 +111,9 @@ end
 
 function Relixer_LS()
     local lsCooldown = GetCooldown(getSpellId("Lightning Strike"))
-	local lsSlot = FindActionSlotByTexture(lsTexture)
 	
-	if lsSlot and IsUsableAction(lsSlot) and lsCooldown == 0 then
-        CastSwapByName("Lightning Strike", nil, "Totem of Crackling Thunder")
+	if lsCooldown == 0 then
+        CastSwapByName("Lightning Strike", "Rank 3", "Totem of Crackling Thunder")
     end
 end
 
