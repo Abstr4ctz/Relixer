@@ -2,23 +2,22 @@
 
 BINDING_HEADER_RELIXER = "Relixer";
 
------ OTHER VARIABLES -----
-
-local lsTexture = "Spell_Nature_Thunderclap"
-local esTexture = "Spell_Nature_Earthshock"
-
-
 ------ HELPER FUNCTIONS ------
 
 local function getSpellId(targetSpellName, targetSpellRank)
+    local lastMatch = nil
     for i = 1, 200 do
         local spellName, spellRank = GetSpellName(i, "spell")
-        if spellName == targetSpellName and (not targetSpellRank or spellRank == targetSpellRank) then
-            return i
+        if spellName == targetSpellName then
+            lastMatch = i -- Keep track of the latest match
+            if targetSpellRank and spellRank == targetSpellRank then
+                return i -- Return immediately if rank matches
+            end
         end
     end
-    return nil
+    return lastMatch -- Return the highest rank if no specific rank is requested
 end
+
 
 
 local function GetCooldown(spellId)
@@ -37,16 +36,6 @@ end
 local function SpellReady(spellId)
     local start, duration, enabled = GetSpellCooldown(spellId, "spell")
     return duration == 0
-end
-
-local function FindActionSlotByTexture(texture)
-    for i = 1, 120 do
-        local actionTexture = GetActionTexture(i)
-        if actionTexture and string.find(actionTexture, texture) then
-            return i
-        end
-    end
-    return nil
 end
 
 local function ItemLinkToName(link)
@@ -96,6 +85,19 @@ local function UseItemByName(item)
 	end
 end
 
+function EquipItemByName(itemName)
+    for bag = 0, 4 do  -- Loops through all bags (0 to 4 includes backpack and additional bags)
+        for slot = 1, GetContainerNumSlots(bag) do
+            local itemLink = GetContainerItemLink(bag, slot)
+            if itemLink and string.find(itemLink, itemName) then
+                UseContainerItem(bag, slot)  -- Equips the item
+                return  -- Stop searching once the item is found and equipped
+            end
+        end
+    end
+end
+
+
 local function CastSwapByName(targetSpellName, targetSpellRank, itemName)
     local spellId = getSpellId(targetSpellName, targetSpellRank)
     if spellId then
@@ -107,58 +109,103 @@ local function CastSwapByName(targetSpellName, targetSpellRank, itemName)
     end
 end
 
+
+-- Check if a specific totem is equipped in the relic slot
+local function IsRelicEquipped(itemName)
+    local equippedItemLink = GetInventoryItemLink("player", 18) -- Slot 18 is used for ranged/relic slot
+    if equippedItemLink and string.find(equippedItemLink, itemName) then
+        return true
+    end
+    return false
+end
+
 ------ LS ------
 
 function Relixer_LS()
+
     local lsCooldown = GetCooldown(getSpellId("Lightning Strike"))
 	
-	if lsCooldown == 0 then
-        CastSwapByName("Lightning Strike", "Rank 3", "Totem of Crackling Thunder")
+	if not IsRelicEquipped("Totem of Crackling Thunder") and lsCooldown == 0 and UnitCanAttack("player", "target")  and IsSpellInRange("Lightning Strike") == 1 then
+		--QueueScript('EquipItemByName("Totem of Crackling Thunder");CastSpellByName("Lightning Strike")')
+		CastSwapByName("Lightning Strike", nil, "Totem of Crackling Thunder")
+	else
+		CastSpellByName("Lightning Strike")
     end
 end
 
 ------ SHOCKS ------
 
 function Relixer_FrostShockMax()
-    local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
-	if shockCooldown == 0 then
-		CastSwapByName("Frost Shock", "Rank 4", "Totem of the Stonebreaker")
-	end
+
+    local shockCooldown = GetCooldown(getSpellId("Frost Shock"))
+
+	if not IsRelicEquipped("Totem of the Stonebreaker") and shockCooldown == 0 and UnitCanAttack("player", "target")  and IsSpellInRange("Frost Shock") == 1 then
+		--QueueScript('EquipItemByName("Totem of the Stonebreaker");CastSpellByName("Frost Shock")')
+		CastSwapByName("Frost Shock", nil, "Totem of the Stonebreaker")
+	else
+		CastSpellByName("Frost Shock")
+    end
 end
 
+
 function Relixer_FrostShockMin()
-    local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
-	if shockCooldown == 0 then
+
+    local shockCooldown = GetCooldown(getSpellId("Frost Shock"))
+
+	if not IsRelicEquipped("Totem of the Stonebreaker") and shockCooldown == 0 and UnitCanAttack("player", "target")  and IsSpellInRange("Frost Shock") == 1 then
+		--QueueScript('EquipItemByName("Totem of the Stonebreaker");CastSpellByName("Frost Shock(Rank 1)")')
 		CastSwapByName("Frost Shock", "Rank 1", "Totem of the Stonebreaker")
-	end
+	else
+		CastSpellByName("Frost Shock(Rank 1)")
+    end
 end
 
 function Relixer_EarthShockMax()
+
     local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
-	if shockCooldown == 0 then
-		CastSwapByName("Earth Shock", "Rank 7", "Totem of the Stonebreaker")
-	end
+
+	if not IsRelicEquipped("Totem of the Stonebreaker") and shockCooldown == 0 and UnitCanAttack("player", "target")  and IsSpellInRange("Earth Shock") == 1 then
+		--QueueScript('EquipItemByName("Totem of the Stonebreaker");CastSpellByName("Earth Shock")')
+		CastSwapByName("Earth Shock", nil, "Totem of the Stonebreaker")
+	else
+		CastSpellByName("Earth Shock")
+    end
 end
 
 function Relixer_EarthShockMin()
+
     local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
-	if shockCooldown == 0 then
+
+	if not IsRelicEquipped("Totem of the Stonebreaker") and shockCooldown == 0 and UnitCanAttack("player", "target")  and IsSpellInRange("Earth Shock") == 1 then
+		--QueueScript('EquipItemByName("Totem of the Stonebreaker");CastSpellByName("Earth Shock(Rank 1)")')
 		CastSwapByName("Earth Shock", "Rank 1", "Totem of the Stonebreaker")
-	end
+	else
+		CastSpellByName("Earth Shock(Rank 1)")
+    end
 end
 
 function Relixer_FlameShockMax()
-    local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
-	if shockCooldown == 0 then
-		CastSwapByName("Flame Shock", "Rank 6", "Totem of the Stonebreaker")
-	end
+
+    local shockCooldown = GetCooldown(getSpellId("Flame Shock"))
+
+	if not IsRelicEquipped("Totem of the Stonebreaker") and shockCooldown == 0 and UnitCanAttack("player", "target")  and IsSpellInRange("Flame Shock") == 1 then
+		--QueueScript('EquipItemByName("Totem of the Stonebreaker");CastSpellByName("Flame Shock")')
+		CastSwapByName("Flame Shock", nil, "Totem of the Stonebreaker")
+	else
+		CastSpellByName("Flame Shock")
+    end
 end
 
 function Relixer_FlameShockMin()
-    local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
-	if shockCooldown == 0 then
+
+    local shockCooldown = GetCooldown(getSpellId("Flame Shock"))
+
+	if not IsRelicEquipped("Totem of the Stonebreaker") and shockCooldown == 0 and UnitCanAttack("player", "target")  and IsSpellInRange("Flame Shock") == 1 then
+		--QueueScript('EquipItemByName("Totem of the Stonebreaker");CastSpellByName("Flame Shock(Rank 1)")')
 		CastSwapByName("Flame Shock", "Rank 1", "Totem of the Stonebreaker")
-	end
+	else
+		CastSpellByName("Flame Shock(Rank 1)")
+    end
 end
 
 ------ SLASH COMMANDS ------
