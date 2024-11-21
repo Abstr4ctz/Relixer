@@ -2,6 +2,12 @@
 
 BINDING_HEADER_RELIXER = "Relixer";
 
+----- OTHER VARIABLES -----
+
+local lsTexture = "Spell_Nature_Thunderclap"
+local esTexture = "Spell_Nature_Earthshock"
+
+
 ------ HELPER FUNCTIONS ------
 
 local function getSpellId(targetSpellName, targetSpellRank)
@@ -31,6 +37,16 @@ end
 local function SpellReady(spellId)
     local start, duration, enabled = GetSpellCooldown(spellId, "spell")
     return duration == 0
+end
+
+local function FindActionSlotByTexture(texture)
+    for i = 1, 120 do
+        local actionTexture = GetActionTexture(i)
+        if actionTexture and string.find(actionTexture, texture) then
+            return i
+        end
+    end
+    return nil
 end
 
 local function ItemLinkToName(link)
@@ -95,8 +111,9 @@ end
 
 function Relixer_LS()
     local lsCooldown = GetCooldown(getSpellId("Lightning Strike"))
-
-    if lsCooldown == 0 then
+	local lsSlot = FindActionSlotByTexture(lsTexture)
+	
+	if lsSlot and IsUsableAction(lsSlot) and lsCooldown == 0 then
         CastSwapByName("Lightning Strike", nil, "Totem of Crackling Thunder")
     end
 end
@@ -106,7 +123,7 @@ end
 function Relixer_FrostShockMax()
     local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
 	if shockCooldown == 0 then
-		CastSwapByName("Frost Shock", nil, "Totem of the Stonebreaker")
+		CastSwapByName("Frost Shock", "Rank 4", "Totem of the Stonebreaker")
 	end
 end
 
@@ -120,7 +137,7 @@ end
 function Relixer_EarthShockMax()
     local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
 	if shockCooldown == 0 then
-		CastSwapByName("Earth Shock", nil, "Totem of the Stonebreaker")
+		CastSwapByName("Earth Shock", "Rank 7", "Totem of the Stonebreaker")
 	end
 end
 
@@ -134,7 +151,7 @@ end
 function Relixer_FlameShockMax()
     local shockCooldown = GetCooldown(getSpellId("Earth Shock"))
 	if shockCooldown == 0 then
-		CastSwapByName("Flame Shock", nil, "Totem of the Stonebreaker")
+		CastSwapByName("Flame Shock", "Rank 6", "Totem of the Stonebreaker")
 	end
 end
 
