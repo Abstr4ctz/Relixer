@@ -2,16 +2,16 @@
 https://github.com/pepopo978/nampower<br/>
 https://github.com/pepopo978/NampowerSettings<br/>
 ### Swap totems between Totem of Crackling Thunder and Totem of the Stonebreaker when using Lightning Strike and Shocks. To keybind press ESC > Key Bindings and scroll down. Or you can use them in macros:<br/>
-# Flame Shock:<br/>
+## Flame Shock:<br/>
 /relixerflameshockmax<br/>
 /relixerflameshockmin<br/>
-# Frost Shock:<br/>
+## Frost Shock:<br/>
 /relixerfrostshockmax<br/>
 /relixerfrostshockmin<br/>
-# Earth Shock:<br/>
+## Earth Shock:<br/>
 /relixerearthshockmax<br/>
 /relixerearthshockmin<br/>
-# Lightning Strike:<br/>
+## Lightning Strike:<br/>
 /relixerls<br/>
-## To Do List:<br/>
+# To Do List:<br/>
 Currently will still swap relic but not cast if you are facing your back to the target.
