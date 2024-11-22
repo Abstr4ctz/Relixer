@@ -15,3 +15,4 @@ https://github.com/pepopo978/NampowerSettings<br/>
 /relixerls<br/>
 # To Do List:<br/>
 Currently will still swap relic but not cast if you are facing your back to the target.
+Add Totem of Earthstorm and Totem of the Calming River.
